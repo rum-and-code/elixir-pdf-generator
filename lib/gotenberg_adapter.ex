@@ -1,5 +1,7 @@
 defmodule PdfGenerator.GotenbergAdapter do
   @behaviour PdfGenerator
+  @type path :: String.t()
+  @type options :: [Keyword.t()]
 
   defp caller_url, do: Application.fetch_env!(:pdf_generator, :caller_url)
   defp pdf_generator_url, do: Application.fetch_env!(:pdf_generator, :pdf_generator_url)
@@ -16,8 +18,14 @@ defmodule PdfGenerator.GotenbergAdapter do
   ## Options
   Refer to https://gotenberg.dev/docs/modules/chromium for a list of available options.
 
-  By default, we use the option `prefer_css_page_size: true`. This allow us to use the @page css rule to define the page size.
+  By default, we use the option `prefer_css_page_size: true`. This allow us to use the @page css rule to define the page size like so
+  ```css
+  @page {
+    size: letter landscape;
+  }
+  ```
   """
+  @spec convert_path_to_pdf(path(), options()) :: {:ok, binary()} | {:error, any()}
   def convert_path_to_pdf(path, options \\ []) do
     url = caller_url() <> path
 
