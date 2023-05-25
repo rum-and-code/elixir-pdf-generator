@@ -22,7 +22,7 @@ defmodule PdfGenerator.MixProject do
   defp deps do
     [
       {:elixir_utils, git: "git@github.com:rum-and-code/elixir-utils.git"},
-      {:httpoison, "~> 2.1"}
+      {:httpoison, "~> 1.0"}
     ]
   end
 end
