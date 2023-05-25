@@ -13,6 +13,6 @@ defmodule PdfGenerator do
   end
 
   def adapter do
-    Application.fetch_env!(:pdf_generator, :adapter) || PdfGenerator.GotenbergAdapter
+    Application.get_env(:pdf_generator, :adapter, PdfGenerator.GotenbergAdapter)
   end
 end
