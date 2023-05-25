@@ -21,7 +21,6 @@ defmodule PdfGenerator.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:elixir_utils, git: "git@github.com:rum-and-code/elixir-utils.git"},
       {:httpoison, "~> 1.0"}
     ]
   end

@@ -46,7 +46,7 @@ defmodule PdfGenerator.GotenbergAdapter do
     defaults
     |> Keyword.merge(options)
     |> Enum.map(fn {key, value} ->
-      {Utils.Casing.camelize(key), to_string(value)}
+      {PdfGenerator.Utils.Casing.camelize(key), to_string(value)}
     end)
   end
 
