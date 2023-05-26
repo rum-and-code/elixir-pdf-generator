@@ -7,7 +7,9 @@ defmodule PdfGenerator.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      aliases: aliases(),
+      deps: deps(),
+      preferred_cli_env: [pipeline: :test]
     ]
   end
 
@@ -21,7 +23,14 @@ defmodule PdfGenerator.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.0"}
+      {:httpoison, "~> 1.0"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+    ]
+  end
+
+  defp aliases do
+    [
+      pipeline: ["format --check-formatted", "compile --warnings-as-errors", "test", "credo"]
     ]
   end
 end

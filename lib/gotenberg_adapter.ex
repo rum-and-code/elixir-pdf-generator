@@ -1,4 +1,8 @@
 defmodule PdfGenerator.GotenbergAdapter do
+  @moduledoc """
+  This module provides an adapter for the Gotenberg API.
+  """
+
   @behaviour PdfGenerator
   @type path :: String.t()
   @type options :: [Keyword.t()]

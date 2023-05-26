@@ -1,4 +1,8 @@
 defmodule PdfGenerator do
+  @moduledoc """
+  This module provides a simple interface to convert a path to a PDF.
+  """
+
   @type path :: String.t()
   @type options :: [Keyword.t()]
   @callback convert_path_to_pdf(path(), options()) :: {:ok, binary()} | {:error, any()}

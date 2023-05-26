@@ -1,4 +1,7 @@
 defmodule PdfGenerator.TestAdapter do
+  @moduledoc """
+  This module provides an adapter for your tests.
+  """
   @behaviour PdfGenerator
 
   @impl PdfGenerator

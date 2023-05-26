@@ -1,0 +1,36 @@
+name: CI pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        otp_version: ['24.3', '25.3']
+        elixir_version: ['1.13', '1.14']
+
+    name: CI pipeline (Elixir ${{matrix.elixir_version}} / OTP ${{matrix.otp_version}} )
+    steps:
+      - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{matrix.otp_version}}
+          elixir-version: ${{matrix.elixir_version}}
+      - name: Restore mix dependencies cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-${{matrix.elixir_version}}-${{matrix.otp_version}}-mix-${{ hashFiles('mix.lock') }}
+      - run: |
+          mix deps.get
+          mix pipeline
+
+
+
