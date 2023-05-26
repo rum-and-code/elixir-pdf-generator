@@ -9,7 +9,7 @@ def deps do
   ]
 end
 ```
-Once you've added Bamboo to your list, update your dependencies by running:
+Once you've added PdfGenerator to your list, update your dependencies by running:
 
 ```
 $ mix deps.get
