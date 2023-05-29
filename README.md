@@ -22,13 +22,13 @@ Here are the config needed for the Gotenberg Adapter.
 ```elixir
 config :pdf_generator,
   adapter: PdfGenerator.GotenbergAdapter, #Defaults to GotenbergAdapter if not specified.
-  caller_url: "http://your-app.com",
+  host_url: "http://your-app.com",
   pdf_generator_url: "http://your-gotenburg-service.com"
 ```
 
 We also provide a simple TestAdapter that you can set in your test config.
 
 ```elixir
-config :pdf_generator, adapter: Idp.PdfGenerator.TestAdapter
+config :pdf_generator, adapter: PdfGenerator.TestAdapter
 ```
 
