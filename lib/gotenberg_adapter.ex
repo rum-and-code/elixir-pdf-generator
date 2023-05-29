@@ -7,7 +7,7 @@ defmodule PdfGenerator.GotenbergAdapter do
   @type path :: String.t()
   @type options :: [Keyword.t()]
 
-  defp caller_url, do: Application.fetch_env!(:pdf_generator, :caller_url)
+  defp host_url, do: Application.fetch_env!(:pdf_generator, :host_url)
   defp pdf_generator_url, do: Application.fetch_env!(:pdf_generator, :pdf_generator_url)
 
   @impl PdfGenerator
@@ -31,7 +31,7 @@ defmodule PdfGenerator.GotenbergAdapter do
   """
   @spec convert_path_to_pdf(path(), options()) :: {:ok, binary()} | {:error, any()}
   def convert_path_to_pdf(path, options \\ []) do
-    url = caller_url() <> path
+    url = host_url() <> path
 
     url
     |> build_body(options)
