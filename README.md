@@ -26,9 +26,3 @@ config :pdf_generator,
   pdf_generator_url: "http://your-gotenburg-service.com"
 ```
 
-We also provide a simple TestAdapter that you can set in your test config.
-
-```elixir
-config :pdf_generator, adapter: PdfGenerator.TestAdapter
-```
-
