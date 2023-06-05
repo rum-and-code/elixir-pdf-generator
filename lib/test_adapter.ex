@@ -5,8 +5,8 @@ defmodule PdfGenerator.TestAdapter do
   @behaviour PdfGenerator
 
   @impl PdfGenerator
-  def convert_path_to_pdf(_path, options \\ [success?: true]) do
-    if Keyword.get(options, :success?) do
+  def convert_path_to_pdf(_path, options \\ []) do
+    if Keyword.get(options, :success?, true) do
       {:ok, "PDF"}
     else
       {:error, "error"}
