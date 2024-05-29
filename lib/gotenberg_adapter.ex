@@ -3,6 +3,8 @@ defmodule PdfGenerator.GotenbergAdapter do
   This module provides an adapter for the Gotenberg API.
   """
 
+  require Logger
+
   @behaviour PdfGenerator
   @type path :: String.t()
   @type options :: [Keyword.t()]
@@ -38,8 +40,12 @@ defmodule PdfGenerator.GotenbergAdapter do
     |> build_request()
     |> HTTPoison.request()
     |> case do
-      {:ok, response} -> {:ok, response.body}
-      {:error, error} -> {:error, error}
+      {:ok, response} ->
+        {:ok, response.body}
+
+      {:error, error} ->
+        Logger.error("Failed to convert path to PDF: #{inspect(error)}")
+        {:error, error}
     end
   end
 
