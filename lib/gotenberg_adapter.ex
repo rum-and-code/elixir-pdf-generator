@@ -32,7 +32,7 @@ defmodule PdfGenerator.GotenbergAdapter do
   """
   @spec convert_path_to_pdf(path(), options(), request_options()) ::
           {:ok, binary()} | {:error, any()}
-  def convert_path_to_pdf(path, options \\ [], request_options \\ []) do
+  def convert_path_to_pdf(path, options, request_options) do
     url = host_url() <> path
 
     url

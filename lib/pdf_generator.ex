@@ -17,7 +17,7 @@ defmodule PdfGenerator do
   @spec convert_path_to_pdf(path(), options(), request_options()) ::
           {:ok, binary()} | {:error, any()}
   def convert_path_to_pdf(path, options \\ [], request_options \\ []) do
-    adapter().convert_path_to_pdf(path, options, request_options \\ [])
+    adapter().convert_path_to_pdf(path, options, request_options)
   end
 
   def adapter do
