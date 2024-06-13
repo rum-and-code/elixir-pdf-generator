@@ -30,12 +30,12 @@ defmodule PdfGenerator.GotenbergAdapter do
   ```
   """
   @spec convert_path_to_pdf(path(), options()) :: {:ok, binary()} | {:error, any()}
-  def convert_path_to_pdf(path, options \\ []) do
+  def convert_path_to_pdf(path, options \\ [], request_options \\ []) do
     url = host_url() <> path
 
     url
     |> build_body(options)
-    |> build_request()
+    |> build_request(request_options)
     |> HTTPoison.request()
     |> case do
       {:ok, response} -> {:ok, response.body}
@@ -62,12 +62,13 @@ defmodule PdfGenerator.GotenbergAdapter do
     end)
   end
 
-  defp build_request(body) do
+  defp build_request(body, options) do
     %HTTPoison.Request{
       method: :post,
       url: pdf_generator_url(),
       headers: headers(),
-      body: {:multipart, body}
+      body: {:multipart, body},
+      options: options
     }
   end
 end
