@@ -7,7 +7,7 @@ Change your mix file to use a specific tag instead
 ```elixir
 def deps do
   [
-    {:elixir_pdf_generator, git: "git@github.com:rum-and-code/elixir-pdf-generator.git"}
+    {:elixir_pdf_generator, git: "git@github.com:rum-and-code/elixir-pdf-generator.git", tag: "v0.1.2"}
   ]
 end
 ```
