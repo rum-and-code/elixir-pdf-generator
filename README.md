@@ -1,3 +1,5 @@
+⚠️ BRANCH MAIN IS DEPRECATED ⚠️
+Change your mix file to use a specific tag instead
 # Elixir Pdf Generator
 
 ## Installation
