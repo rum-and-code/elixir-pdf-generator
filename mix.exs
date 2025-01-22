@@ -24,7 +24,7 @@ defmodule PdfGenerator.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.0"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false}
     ]
   end
 
