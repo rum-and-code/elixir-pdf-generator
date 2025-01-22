@@ -24,3 +24,6 @@ pdf_generator-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+.direnv/*
+.nix-mix/*

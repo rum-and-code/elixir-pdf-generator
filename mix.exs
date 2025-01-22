@@ -4,7 +4,7 @@ defmodule PdfGenerator.MixProject do
   def project do
     [
       app: :pdf_generator,
-      version: "0.1.1",
+      version: "0.1.2",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -24,7 +24,7 @@ defmodule PdfGenerator.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.0"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false}
     ]
   end
 

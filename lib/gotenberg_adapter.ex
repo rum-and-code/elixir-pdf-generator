@@ -34,43 +34,38 @@ defmodule PdfGenerator.GotenbergAdapter do
           {:ok, binary()} | {:error, any()}
   def convert_path_to_pdf(path, options, request_options) do
     url = host_url() <> path
+    headers = [{"Content-Type", "multipart/form-data"}]
 
-    url
-    |> build_body(options)
-    |> build_request(request_options)
-    |> HTTPoison.request()
-    |> case do
+    body =
+      [url: url, prefer_css_page_size: true]
+      |> Keyword.merge(options)
+      |> Enum.map(fn {key, value} ->
+        {PdfGenerator.Utils.Casing.camelize(key), to_string(value)}
+      end)
+
+    request = %HTTPoison.Request{
+      method: :post,
+      url: "#{pdf_generator_url()}/forms/chromium/convert/url",
+      headers: headers,
+      body: {:multipart, body},
+      options: request_options
+    }
+
+    case HTTPoison.request(request) do
       {:ok, response} -> {:ok, response.body}
       {:error, error} -> {:error, error}
     end
   end
 
-  defp headers() do
-    [
-      {"Content-Type", "multipart/form-data"}
-    ]
-  end
-
-  defp build_body(url, options) do
-    defaults = [
-      url: url,
-      prefer_css_page_size: true
-    ]
-
-    defaults
-    |> Keyword.merge(options)
-    |> Enum.map(fn {key, value} ->
-      {PdfGenerator.Utils.Casing.camelize(key), to_string(value)}
-    end)
-  end
-
-  defp build_request(body, options) do
-    %HTTPoison.Request{
-      method: :post,
-      url: pdf_generator_url(),
-      headers: headers(),
-      body: {:multipart, body},
-      options: options
+  def health do
+    request = %HTTPoison.Request{
+      method: :get,
+      url: "#{pdf_generator_url()}/health"
     }
+
+    case HTTPoison.request(request) do
+      {:ok, response} -> {:ok, response.body}
+      {:error, error} -> {:error, error}
+    end
   end
 end

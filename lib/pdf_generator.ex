@@ -20,6 +20,10 @@ defmodule PdfGenerator do
     adapter().convert_path_to_pdf(path, options, request_options)
   end
 
+  def health() do
+    adapter().health()
+  end
+
   def adapter do
     Application.get_env(:pdf_generator, :adapter, PdfGenerator.GotenbergAdapter)
   end
