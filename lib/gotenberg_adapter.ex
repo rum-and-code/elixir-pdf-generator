@@ -29,8 +29,9 @@ defmodule PdfGenerator.GotenbergAdapter do
   }
   ```
   """
-  @spec convert_path_to_pdf(path(), options()) :: {:ok, binary()} | {:error, any()}
-  def convert_path_to_pdf(path, options \\ []) do
+  @spec convert_path_to_pdf(path(), options(), request_options()) ::
+          {:ok, binary()} | {:error, any()}
+  def convert_path_to_pdf(path, options, request_options) do
     url = host_url() <> path
     headers = [{"Content-Type", "multipart/form-data"}]
 
@@ -46,7 +47,8 @@ defmodule PdfGenerator.GotenbergAdapter do
         method: :post,
         url: "#{pdf_generator_url()}/forms/chromium/convert/url",
         headers: headers,
-        body: {:multipart, body}
+        body: {:multipart, body},
+        options: request_options
       }
 
     case HTTPoison.request(request) do
