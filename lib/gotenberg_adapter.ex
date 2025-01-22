@@ -43,14 +43,13 @@ defmodule PdfGenerator.GotenbergAdapter do
         {PdfGenerator.Utils.Casing.camelize(key), to_string(value)}
       end)
 
-    request =
-      %HTTPoison.Request{
-        method: :post,
-        url: "#{pdf_generator_url()}/forms/chromium/convert/url",
-        headers: headers,
-        body: {:multipart, body},
-        options: request_options
-      }
+    request = %HTTPoison.Request{
+      method: :post,
+      url: "#{pdf_generator_url()}/forms/chromium/convert/url",
+      headers: headers,
+      body: {:multipart, body},
+      options: request_options
+    }
 
     case HTTPoison.request(request) do
       {:ok, response} -> {:ok, response.body}
@@ -59,11 +58,10 @@ defmodule PdfGenerator.GotenbergAdapter do
   end
 
   def health do
-    request =
-      %HTTPoison.Request{
-        method: :get,
-        url: "#{pdf_generator_url()}/health"
-      }
+    request = %HTTPoison.Request{
+      method: :get,
+      url: "#{pdf_generator_url()}/health"
+    }
 
     case HTTPoison.request(request) do
       {:ok, response} -> {:ok, response.body}
